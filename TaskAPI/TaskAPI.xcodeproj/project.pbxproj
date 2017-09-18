@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F4281E51F6F426900B100C7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4281E41F6F426900B100C7 /* Task.swift */; };
 		OBJ_1002 /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_470 /* http_parser.c */; };
 		OBJ_1004 /* Bits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_740 /* Bits.framework */; };
 		OBJ_1005 /* Debugging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_741 /* Debugging.framework */; };
@@ -4400,6 +4401,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F4281E41F6F426900B100C7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Droplet+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Droplet+Setup.swift"; sourceTree = "<group>"; };
 		OBJ_100 /* Query+Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Query+Group.swift"; sourceTree = "<group>"; };
 		OBJ_101 /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
@@ -5842,6 +5844,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_15 /* Post.swift */,
+				2F4281E41F6F426900B100C7 /* Task.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -6905,7 +6908,7 @@
 			path = Email;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -6916,7 +6919,6 @@
 				OBJ_25 /* Dependencies */,
 				OBJ_739 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Fluent 2.1.0 */ = {
@@ -8854,7 +8856,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_739 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -9544,6 +9546,7 @@
 				OBJ_2285 /* Droplet+Setup.swift in Sources */,
 				OBJ_2286 /* Routes.swift in Sources */,
 				OBJ_2287 /* PostController.swift in Sources */,
+				2F4281E51F6F426900B100C7 /* Task.swift in Sources */,
 				OBJ_2288 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
