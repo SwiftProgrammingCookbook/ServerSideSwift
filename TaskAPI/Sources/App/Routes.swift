@@ -1,5 +1,7 @@
 import Vapor
 
+var tasks = [Task]()
+
 extension Droplet {
     func setupRoutes() throws {
         get("hello") { req in
@@ -21,5 +23,20 @@ extension Droplet {
         get("description") { req in return req.description }
         
         try resource("posts", PostController.self)
+        
+        post("task") { request in
+            
+            guard let json = request.json else {
+                throw Abort.badRequest
+            }
+            
+            let task = try Task(json: json)
+            tasks.append(task)
+            return try task.makeJSON()
+        }
+        
+        get("task") { request in
+            return try tasks.makeJSON()
+        }
     }
 }
