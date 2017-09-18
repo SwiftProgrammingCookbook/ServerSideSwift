@@ -7,7 +7,7 @@
 
 import JSON
 
-class Task: JSONConvertible {
+final class Task: JSONConvertible {
     
     enum Error: Swift.Error {
         case expectedJSONData
