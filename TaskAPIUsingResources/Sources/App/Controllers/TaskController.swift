@@ -5,8 +5,6 @@
 //  Created by Keith Moon on 18/09/2017.
 //
 
-import Vapor
-import HTTP
 import JSON
 
 var tasksByID = [String: Task]()
@@ -26,11 +24,9 @@ extension Task: Parameterizable {
     }
 }
 
-final class TaskController: ResourceRepresentable {
+final class TaskController: ResourceRepresentable, EmptyInitializable {
     
     typealias Model = Task
-    
-    var tasks = [Task]()
     
     func index(request: Request) throws -> ResponseRepresentable {
         return try tasksByID.values.makeJSON()
@@ -57,5 +53,3 @@ final class TaskController: ResourceRepresentable {
                         show: show)
     }
 }
-
-extension TaskController: EmptyInitializable { }
