@@ -7,19 +7,39 @@
 
 import Foundation
 import JSON
+import FluentProvider
 
-final class Task: JSONConvertible {
+final class Task: JSONConvertible, Model {
+    
+    // MARK: - Entity Conformance
+    
+    var storage = Storage()
+    
+    init(row: Row) throws {
+        
+        description = try row.get("description")
+        category = try row.get("category")
+    }
+    
+    func makeRow() throws -> Row {
+        
+        var row = Row()
+        try row.set("id", id)
+        try row.set("description", description)
+        try row.set("category", category)
+        return row
+    }
+    
+    // MARK: -
     
     enum Error: Swift.Error {
         case expectedJSONData
     }
     
-    var id: String
     var description: String
     var category: String
     
-    init(id: String, description: String, category: String) {
-        self.id = id
+    init(description: String, category: String) {
         self.description = description
         self.category = category
     }
@@ -33,12 +53,6 @@ final class Task: JSONConvertible {
         }
         self.description = description
         self.category = category
-        
-        if let id = json["id"]?.string {
-            self.id = id
-        } else {
-            self.id = UUID().uuidString
-        }
     }
     
     func makeJSON() throws -> JSON {
@@ -47,5 +61,21 @@ final class Task: JSONConvertible {
         try json.set("description", description)
         try json.set("category", category)
         return json
+    }
+}
+
+extension Task: Preparation {
+    
+    static func prepare(_ database: Database) throws {
+        
+        try database.create(self) { builder in
+            builder.id()
+            builder.string("description")
+            builder.string("category")
+        }
+    }
+    
+    static func revert(_ database: Database) throws {
+        try database.delete(self)
     }
 }

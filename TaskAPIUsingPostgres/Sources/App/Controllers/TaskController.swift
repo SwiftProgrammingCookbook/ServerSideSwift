@@ -9,8 +9,6 @@ import Vapor
 import HTTP
 import JSON
 
-var tasksByID = [String: Task]()
-
 extension Task: Parameterizable {
     
     static var uniqueSlug: String {
@@ -19,21 +17,21 @@ extension Task: Parameterizable {
     
     // returns the found model for the resolved url parameter
     static func make(for parameter: String) throws -> Task {
-        guard let task = tasksByID[parameter] else {
+        
+        guard let task = try Task.find(parameter) else {
             throw Abort.notFound
         }
         return task
     }
 }
 
-final class TaskController: ResourceRepresentable {
+final class TaskController: ResourceRepresentable, EmptyInitializable {
     
     typealias Model = Task
     
-    var tasks = [Task]()
-    
     func index(request: Request) throws -> ResponseRepresentable {
-        return try tasksByID.values.makeJSON()
+        let tasks: [Task] = try Task.all()
+        return try tasks.makeJSON()
     }
     
     func create(request: Request) throws -> ResponseRepresentable {
@@ -43,7 +41,7 @@ final class TaskController: ResourceRepresentable {
         }
         
         let task = try Task(json: json)
-        tasksByID[task.id] = task
+        try task.save()
         return try task.makeJSON()
     }
     
@@ -57,5 +55,3 @@ final class TaskController: ResourceRepresentable {
                         show: show)
     }
 }
-
-extension TaskController: EmptyInitializable { }
