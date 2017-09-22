@@ -79,3 +79,16 @@ extension Task: Preparation {
         try database.delete(self)
     }
 }
+
+extension Task: Updateable {
+    
+    public static var updateableKeys: [UpdateableKey<Task>] {
+        
+        return [UpdateableKey("description", String.self) { (task, description) in
+                    task.description = description
+                },
+                UpdateableKey("category", String.self) { (task, category) in
+                    task.category = category
+                }]
+    }
+}

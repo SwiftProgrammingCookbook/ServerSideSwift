@@ -49,9 +49,23 @@ final class TaskController: ResourceRepresentable, EmptyInitializable {
         return try task.makeJSON()
     }
     
+    func update(_ req: Request, task: Task) throws -> ResponseRepresentable {
+        try task.update(for: req)
+        try task.save()
+        return try task.makeJSON()
+    }
+    
+    func delete(request: Request, task: Task) throws -> ResponseRepresentable {
+        try task.delete()
+        let tasks: [Task] = try Task.all()
+        return try tasks.makeJSON()
+    }
+
     func makeResource() -> Resource<Task> {
         return Resource(index: index,
                         store: create,
-                        show: show)
+                        show: show,
+                        update: update,
+                        destroy: delete)
     }
 }
